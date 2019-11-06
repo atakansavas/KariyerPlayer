@@ -1,0 +1,56 @@
+aside{
+    padding: 30px 60px;
+    background : #FFF5F5;
+  }
+  
+  aside label.search{
+    display: block;
+     margin-bottom: 100px;
+  }
+  aside label.search input{
+    padding:10px 0px;
+    background:transparent;
+    border:0;
+    border-bottom:1px solid #999;
+    width:100%;
+    outline:0;
+  }
+  
+  aside button.btn{
+    cursor:pointer;
+    color:#999;
+    font-weight:600;
+    outline:0;
+    height:150px;
+    display:block;
+    float:left;
+    width:50%;
+    border:0;
+    background:transparent;
+  }
+  aside button.btn.next{
+    text-align:right;
+  }
+  figure.album-cover{
+    width:370px;
+    height:370px;
+    position:relative;
+    border-radius:30px;
+    overflow:hidden;
+    box-shadow:-20px 80px 100px rgba(0,0, 0, 0.2);
+  }
+  figure.album-cover img{
+    width:100%;
+    height:100%;
+  }
+  
+  button[data-button="add-to-playlist"] {
+    background:none;
+    border:none;
+    font-weight:600;
+    font-size:17px;
+    color : #666;
+    cursor: pointer;
+    margin-bottom:70px;
+  }
+  
