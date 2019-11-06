@@ -4,13 +4,27 @@ import Layout from './components/Layout';
 import Home from './components/Home';
 import Counter from './components/Counter';
 import FetchData from './components/FetchData';
+import Menu from './components/Menu'
+import List from './components/List'
+import Player from './components/Player'
 
-import './custom.css'
+import './components/app/app.css'
 
 export default () => (
-    <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetch-data/:startDateIndex?' component={FetchData} />
-    </Layout>
+    <React.Fragment>
+        <div className="wrap" id="root">
+            <div id="menu">
+                <Menu />
+            </div>
+
+            <aside id="playerInfo">
+                <Player />
+            </aside>
+
+            <section id="listInfo">
+                <List />
+            </section>
+        </div>
+    </React.Fragment>
+
 );
