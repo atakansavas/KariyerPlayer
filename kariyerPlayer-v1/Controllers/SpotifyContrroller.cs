@@ -12,19 +12,24 @@ namespace kariyerPlayer_v1.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class SpotifyContrroller : ControllerBase
+    public class SpotifyController : ControllerBase
     {
 
-        private readonly ILogger<SpotifyContrroller> _logger;
+        private readonly ILogger<SpotifyController> _logger;
 
-        public SpotifyContrroller(ILogger<SpotifyContrroller> logger)
+        public SpotifyController(ILogger<SpotifyController> logger)
         {
             _logger = logger;
         }
 
         [HttpGet]
-        public List<TrackInfo> SearchTrack(string query)
+        public IEnumerable<TrackInfo> Get(string query)
         {
+            if (string.IsNullOrEmpty(query))
+            {
+                return new List<TrackInfo>();
+            }
+
             return Spotify.Search(query);
         }
     }

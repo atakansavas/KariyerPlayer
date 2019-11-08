@@ -19,13 +19,20 @@ export const actionCreators = {
     requestSearch: (query: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
         // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
+
+        // Only load data if it's something we don't already have (and are not already loading)
+        if (appState.searchList && query === appState.searchList.query) {
+            return;
+        }
+
         if (appState && appState.searchList) {
-            fetch(`spotify`)
+            fetch(`spotify?query=${query}`)
                 .then(response => response.json() as Promise<Model.TrackInfo[]>)
                 .then(data => {
                     dispatch({ type: 'SPOTIFY_SEARCH_RESPONSE', query: query, trackList: data });
                 });
 
+            console.log("request query = " + query);
             dispatch({ type: 'SPOTIFY_SEARCH_REQUEST', query: query });
         }
     }

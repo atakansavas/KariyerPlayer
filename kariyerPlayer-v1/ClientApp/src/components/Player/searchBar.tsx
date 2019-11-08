@@ -13,29 +13,49 @@ type SpotifyProps =
 class SearchBar extends React.PureComponent<SpotifyProps> {
 
     // This method is called when the component is first added to the document
-    public componentDidMount() {
-        this.ensureDataFetched();
-    }
+    // public componentDidMount() {
+    //     this.ensureDataFetched();
+    // }
 
     // This method is called when the route parameters change
     public componentDidUpdate() {
-        this.ensureDataFetched();
+        this.ensureDataFetched(this.props.query);
+    }
+
+    private ˝(searchText : string) {
+
+        const searchQuery = searchText || "";
+        if (searchQuery.length > 3) {
+
+            console.log("data cekiliyor -- " + searchQuery);
+
+            this.props.requestSearch(searchQuery);
+        }
+      
+    }
+
+        handleChange: React.FormEventHandler < HTMLInputElement > = (event) => {
+
+            var query = event.currentTarget.value;
+            this.ensureDataFetched(query);
+
+    
     }
 
 
-    private ensureDataFetched() {
-        console.log(this.props);
-        const query = this.props.query || "ceza";
+    // private handleChange(event: any) {
 
-        this.props.requestSearch(query);
-    }
+    //     console.log(event);
+    //     // this.props.requestSearch(event.target.value);
+    // }
 
     render() {
         return (
             <React.Fragment>
 
                 <label className="search">
-                    <input type="search" placeholder="Meshur adi?" />
+                    <input type="search" placeholder="Meshur adi?"
+                        onChange={this.handleChange.bind(this)} />
                 </label>
                 {this.renderSearchResult()}
 
@@ -45,26 +65,28 @@ class SearchBar extends React.PureComponent<SpotifyProps> {
     }
 
     private renderSearchResult() {
-        return (
-            <table className='table table-striped' aria-labelledby="tabelLabel">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Temp. (F)</th>
-                        <th>Summary</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.props.playlistTracks.map((item: Model.TrackInfo) =>
-                        <tr key={item.name}>
-                            <td>{item.albumName}</td>
-                            <td>{item.artistName}</td>
-                            <td>{item.name}</td>
+        if (!this.props.isLoading) {
+            return (
+                <table className='table table-striped' aria-labelledby="tabelLabel">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Temp. (F)</th>
+                            <th>Summary</th>
                         </tr>
-                    )}
-                </tbody>
-            </table>
-        );
+                    </thead>
+                    <tbody>
+                        {this.props.playlistTracks.map((item: Model.TrackInfo) =>
+                            <tr key={item.name}>
+                                <td>{item.albumName}</td>
+                                <td>{item.artistName}</td>
+                                <td>{item.name}</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            );
+        }
     }
 
 }
