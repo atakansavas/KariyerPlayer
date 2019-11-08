@@ -12,10 +12,14 @@ namespace kariyerPlayer_v1.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class SpotifyContrroller
+    public class SpotifyContrroller : ControllerBase
     {
-        public SpotifyContrroller()
+
+        private readonly ILogger<SpotifyContrroller> _logger;
+
+        public SpotifyContrroller(ILogger<SpotifyContrroller> logger)
         {
+            _logger = logger;
         }
 
         [HttpGet]
